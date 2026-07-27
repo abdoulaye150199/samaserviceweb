@@ -83,12 +83,14 @@
     <div class="container services-showcase">
       <div class="services-sticky-copy">
         <span class="section-kicker">NOS SERVICES</span>
-        <h2>Tout ce qu’il<br />vous faut.</h2>
+        <h2>Tout ce qu’il<br /><span>vous faut.</span></h2>
         <p>Un besoin. Un pro. Une solution.</p>
-        <a class="text-link" href="#inscription">Rejoindre le réseau <span>→</span></a>
+        <div class="service-tags"><span>Maison</span><span>Bien-être</span><span>Réparation</span></div>
+        <a class="services-join" href="#inscription">Rejoindre le réseau <span>→</span></a>
       </div>
 
       <div class="service-stack">
+        <div class="stack-glow"></div>
         @for (service of services; track service.title; let index = $index) {
           <article class="service-card stacked-card" [class]="'stacked-card card-' + index">
             <div class="stacked-card-top">
