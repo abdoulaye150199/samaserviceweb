@@ -110,6 +110,12 @@
               }
               </div>
             </div>
+            <div
+              class="service-art"
+              [class]="'service-art service-art-' + index"
+              role="img"
+              [attr.aria-label]="'Illustration : ' + service.title"
+            ></div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
             <a href="#inscription">Trouver un professionnel <span>↗</span></a>
