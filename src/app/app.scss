@@ -3678,11 +3678,13 @@ footer {
 
 .how-section .step-illustration img {
   position: absolute;
-  top: 0;
+  top: 50%;
   width: 300%;
   max-width: none;
-  height: 100%;
-  object-fit: fill;
+  height: auto;
+  min-height: 100%;
+  object-fit: initial;
+  transform: translateY(-50%);
 }
 
 .how-section .step-art-01 img { left: 0; }
