@@ -37,7 +37,9 @@ export class AdminDashboard implements OnInit {
   protected readonly authenticated = signal(false);
   protected readonly loading = signal(false);
   protected readonly error = signal('');
-  protected readonly token = signal('');
+  protected readonly email = signal('');
+  protected readonly password = signal('');
+  protected readonly sessionToken = signal('');
   protected readonly activeFilter = signal<'all' | ProfessionalStatus>('all');
   protected readonly search = signal('');
   protected readonly professionals = signal<Professional[]>([]);
@@ -49,26 +51,32 @@ export class AdminDashboard implements OnInit {
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    const savedToken = sessionStorage.getItem('sama-admin-token');
+    const savedToken = sessionStorage.getItem('sama-admin-session');
     if (savedToken) {
-      this.token.set(savedToken);
-      void this.connect();
+      this.sessionToken.set(savedToken);
+      void this.loadExistingSession();
     }
   }
 
   protected async connect(): Promise<void> {
-    if (!this.token().trim()) {
-      this.error.set('Saisissez votre clé d’accès.');
+    if (!this.email().trim() || !this.password()) {
+      this.error.set('Saisissez votre adresse e-mail et votre mot de passe.');
       return;
     }
     this.loading.set(true);
     this.error.set('');
     try {
+      const result = await this.request<{ data: { token: string } }>('/admin/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: this.email().trim(), password: this.password() }),
+      }, false);
+      this.sessionToken.set(result.data.token);
       await this.loadData();
       this.authenticated.set(true);
       if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('sama-admin-token', this.token().trim());
+        sessionStorage.setItem('sama-admin-session', result.data.token);
       }
+      this.password.set('');
     } catch (error) {
       this.authenticated.set(false);
       this.error.set(error instanceof Error ? error.message : 'Connexion impossible.');
@@ -78,9 +86,9 @@ export class AdminDashboard implements OnInit {
   }
 
   protected disconnect(): void {
-    sessionStorage.removeItem('sama-admin-token');
+    sessionStorage.removeItem('sama-admin-session');
     this.authenticated.set(false);
-    this.token.set('');
+    this.sessionToken.set('');
     this.professionals.set([]);
     this.overview.set(null);
   }
@@ -141,11 +149,20 @@ export class AdminDashboard implements OnInit {
     this.professionals.set(result.data);
   }
 
-  private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
+  private async loadExistingSession(): Promise<void> {
+    try {
+      await this.loadData();
+      this.authenticated.set(true);
+    } catch {
+      this.disconnect();
+    }
+  }
+
+  private async request<T>(path: string, init: RequestInit = {}, authenticated = true): Promise<T> {
     const response = await fetch(`${this.apiUrl}${path}`, {
       ...init,
       headers: {
-        Authorization: `Bearer ${this.token().trim()}`,
+        ...(authenticated ? { Authorization: `Bearer ${this.sessionToken()}` } : {}),
         ...(init.body ? { 'Content-Type': 'application/json' } : {}),
       },
     });

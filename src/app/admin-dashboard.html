@@ -8,8 +8,11 @@
         <h1>Pilotez Sama Services en toute simplicité.</h1>
         <p>Accédez aux indicateurs des plateformes et validez les nouvelles inscriptions.</p>
         <form (ngSubmit)="connect()">
-          <label>Clé d’accès administrateur
-            <input type="password" name="token" [ngModel]="token()" (ngModelChange)="token.set($event)" autocomplete="current-password" placeholder="••••••••••••••••" />
+          <label>Adresse e-mail
+            <input type="email" name="email" [ngModel]="email()" (ngModelChange)="email.set($event)" autocomplete="username" placeholder="admin@exemple.com" />
+          </label>
+          <label>Mot de passe
+            <input type="password" name="password" [ngModel]="password()" (ngModelChange)="password.set($event)" autocomplete="current-password" placeholder="••••••••••••" />
           </label>
           @if (error()) { <div class="alert">{{ error() }}</div> }
           <button type="submit" [disabled]="loading()">{{ loading() ? 'Connexion…' : 'Accéder au tableau de bord' }} <span>→</span></button>
