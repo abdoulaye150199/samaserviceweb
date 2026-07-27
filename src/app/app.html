@@ -147,14 +147,8 @@
         @for (step of steps; track step.number; let last = $last) {
           <article class="step">
             <div class="step-number">{{ step.number }}</div>
-            <div class="step-illustration">
-              @if (step.number === '01') {
-                <svg viewBox="0 0 120 100"><rect x="20" y="15" width="80" height="70" rx="10" /><path d="M38 37h44M38 50h28M38 63h35" /><circle cx="85" cy="67" r="14" /><path d="m95 78 10 10" /></svg>
-              } @else if (step.number === '02') {
-                <svg viewBox="0 0 120 100"><rect x="24" y="13" width="72" height="76" rx="10" /><circle cx="60" cy="38" r="12" /><path d="M41 69c3-13 35-13 38 0M38 78h44" /><path class="accent-path" d="m83 20 4 4 8-9" /></svg>
-              } @else {
-                <svg viewBox="0 0 120 100"><path d="M24 24h60v46H48L34 82V70H24V24Z" /><path d="M39 40h31M39 51h22" /><circle cx="87" cy="65" r="17" /><path class="accent-path" d="m79 65 6 6 11-13" /></svg>
-              }
+            <div class="step-illustration" [class]="'step-illustration step-art-' + step.number">
+              <img src="assets/how-it-works-illustrations.png" alt="" />
             </div>
             <h3>{{ step.title }}</h3>
             <p>{{ step.description }}</p>

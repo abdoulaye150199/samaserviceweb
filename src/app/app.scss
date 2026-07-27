@@ -3665,18 +3665,37 @@ footer {
 }
 
 .how-section .step-illustration {
+  position: relative;
   width: 100%;
-  height: 190px;
+  height: 215px;
   margin: 0 0 28px;
+  overflow: hidden;
   border: 0;
   border-radius: 15px;
   color: #b8d6c5;
   background: #222522;
 }
 
-.how-section .step-illustration svg {
-  width: 115px;
-  height: 95px;
+.how-section .step-illustration img {
+  position: absolute;
+  top: 0;
+  width: 300%;
+  max-width: none;
+  height: 100%;
+  object-fit: fill;
+}
+
+.how-section .step-art-01 img { left: 0; }
+.how-section .step-art-02 img { left: -100%; }
+.how-section .step-art-03 img { left: -200%; }
+
+.how-section .step-illustration::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
 }
 
 .how-section .step h3 {
