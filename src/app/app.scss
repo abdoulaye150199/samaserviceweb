@@ -3208,7 +3208,11 @@ footer {
 
 .service-stack {
   position: relative;
-  padding-bottom: 70px;
+  /*
+   * Keep enough runway after the final card so the sticky introduction is
+   * released only once that card has fully left the reading area.
+   */
+  padding-bottom: clamp(300px, 42vh, 460px);
 }
 
 .stacked-card {
@@ -3635,5 +3639,9 @@ footer {
   .services-sticky-copy {
     position: relative !important;
     top: auto !important;
+  }
+
+  .service-stack {
+    padding-bottom: 90px;
   }
 }
