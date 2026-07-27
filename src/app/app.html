@@ -110,20 +110,25 @@
               }
               </div>
             </div>
-            <div
-              class="service-art"
-              [class.service-art-0]="index === 0"
-              [class.service-art-1]="index === 1"
-              [class.service-art-2]="index === 2"
-              [class.service-art-3]="index === 3"
-              role="img"
-              [attr.aria-label]="'Illustration : ' + service.title"
-            >
-              <img src="assets/service-illustrations.png" alt="" />
+            <div class="stacked-card-main">
+              <div
+                class="service-art"
+                [class.service-art-0]="index === 0"
+                [class.service-art-1]="index === 1"
+                [class.service-art-2]="index === 2"
+                [class.service-art-3]="index === 3"
+                role="img"
+                [attr.aria-label]="'Illustration : ' + service.title"
+              >
+                <img src="assets/service-illustrations.png" alt="" />
+              </div>
+              <div class="stacked-card-body">
+                <span class="card-kicker">SAMA / SERVICE 0{{ index + 1 }}</span>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                <a href="#inscription">Découvrir <span>→</span></a>
+              </div>
             </div>
-            <h3>{{ service.title }}</h3>
-            <p>{{ service.description }}</p>
-            <a href="#inscription">Trouver un professionnel <span>↗</span></a>
           </article>
         }
       </div>
