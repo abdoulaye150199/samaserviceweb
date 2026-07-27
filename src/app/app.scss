@@ -3112,8 +3112,10 @@ footer {
 }
 
 .services-sticky-copy {
+  position: -webkit-sticky;
   position: sticky;
-  top: 125px;
+  z-index: 5;
+  top: 24vh;
   align-self: start;
   height: max-content;
   padding-top: 18px;
@@ -3225,21 +3227,28 @@ footer {
 }
 
 .service-art {
+  position: relative;
   width: 100%;
   height: 270px;
   margin-top: 28px;
   overflow: hidden;
   border-radius: 18px;
-  background-image: url('/assets/service-illustrations.png');
-  background-repeat: no-repeat;
-  background-size: 200% 200%;
+  background: #e8ebe6;
   box-shadow: inset 0 0 0 1px rgba(17, 30, 23, .07);
 }
 
-.service-art-0 { background-position: left top; }
-.service-art-1 { background-position: right top; }
-.service-art-2 { background-position: left bottom; }
-.service-art-3 { background-position: right bottom; }
+.service-art img {
+  position: absolute;
+  width: 200%;
+  max-width: none;
+  height: 200%;
+  object-fit: fill;
+}
+
+.service-art-0 img { top: 0; left: 0; }
+.service-art-1 img { top: 0; right: 0; }
+.service-art-2 img { bottom: 0; left: 0; }
+.service-art-3 img { right: 0; bottom: 0; }
 
 .stacked-card p {
   max-width: 430px;

@@ -112,10 +112,15 @@
             </div>
             <div
               class="service-art"
-              [class]="'service-art service-art-' + index"
+              [class.service-art-0]="index === 0"
+              [class.service-art-1]="index === 1"
+              [class.service-art-2]="index === 2"
+              [class.service-art-3]="index === 3"
               role="img"
               [attr.aria-label]="'Illustration : ' + service.title"
-            ></div>
+            >
+              <img src="assets/service-illustrations.png" alt="" />
+            </div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
             <a href="#inscription">Trouver un professionnel <span>↗</span></a>
