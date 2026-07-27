@@ -3180,17 +3180,7 @@ footer {
 }
 
 .service-stack::before {
-  position: absolute;
-  z-index: 0;
-  top: 5%;
-  right: -12%;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: rgba(217, 255, 67, .2);
-  filter: blur(90px);
-  content: "";
-  pointer-events: none;
+  display: none;
 }
 
 .stack-glow {
@@ -3386,9 +3376,7 @@ footer {
 /* Refined horizontal service stack */
 .services-section {
   padding-top: 115px;
-  background:
-    radial-gradient(circle at 76% 20%, rgba(18, 99, 74, .055), transparent 25%),
-    #fff;
+  background: #fff;
 }
 
 .services-showcase {
@@ -3428,13 +3416,14 @@ footer {
   position: absolute;
   z-index: 6;
   top: -1px;
-  right: 12%;
-  left: 12%;
-  height: 2px;
+  right: auto;
+  left: 34px;
+  width: 70px;
+  height: 3px;
   border-radius: 99px;
-  background: linear-gradient(90deg, transparent, #d9ff43, transparent);
+  background: #d9ff43;
   content: "";
-  opacity: .75;
+  opacity: 1;
 }
 
 .stacked-card.card-0,
@@ -3590,23 +3579,15 @@ footer {
   overflow: hidden;
   padding: 125px 0;
   color: #f4f3ed;
-  background:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
-    #181a18;
+  background-color: #181a18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
   background-size: 78px 78px;
 }
 
 .how-section::before {
-  position: absolute;
-  top: -180px;
-  left: 45%;
-  width: 600px;
-  height: 420px;
-  border-radius: 50%;
-  background: rgba(217, 255, 67, .09);
-  filter: blur(110px);
-  content: "";
+  display: none;
 }
 
 .how-section .center-heading {
@@ -3690,9 +3671,7 @@ footer {
   border: 0;
   border-radius: 15px;
   color: #b8d6c5;
-  background:
-    radial-gradient(circle at 50% 45%, rgba(217,255,67,.12), transparent 35%),
-    #222522;
+  background: #222522;
 }
 
 .how-section .step-illustration svg {
