@@ -1,0 +1,122 @@
+<div class="admin-shell">
+  @if (!authenticated()) {
+    <main class="login-page">
+      <a class="admin-brand" href="#"><img src="assets/app-icon.png" alt="" /><span>Sama <b>Admin</b></span></a>
+      <section class="login-card">
+        <div class="login-icon">S</div>
+        <span class="eyebrow">ESPACE SÉCURISÉ</span>
+        <h1>Pilotez Sama Services en toute simplicité.</h1>
+        <p>Accédez aux indicateurs des plateformes et validez les nouvelles inscriptions.</p>
+        <form (ngSubmit)="connect()">
+          <label>Clé d’accès administrateur
+            <input type="password" name="token" [ngModel]="token()" (ngModelChange)="token.set($event)" autocomplete="current-password" placeholder="••••••••••••••••" />
+          </label>
+          @if (error()) { <div class="alert">{{ error() }}</div> }
+          <button type="submit" [disabled]="loading()">{{ loading() ? 'Connexion…' : 'Accéder au tableau de bord' }} <span>→</span></button>
+        </form>
+        <a class="back-link" href="#">← Retour au site public</a>
+      </section>
+    </main>
+  } @else {
+    <aside class="sidebar">
+      <a class="admin-brand" href="#admin"><img src="assets/app-icon.png" alt="" /><span>Sama <b>Admin</b></span></a>
+      <nav>
+        <button class="active"><span>⌂</span>Vue d’ensemble</button>
+        <button (click)="setFilter('pending')"><span>✓</span>Validations <i>{{ overview()?.professionals?.pending || 0 }}</i></button>
+        <button (click)="setFilter('approved')"><span>♙</span>Prestataires</button>
+        <a href="#"><span>↗</span>Voir le site public</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="admin-user"><span>AD</span><div><strong>Administrateur</strong><small>Super admin</small></div></div>
+        <button (click)="disconnect()" aria-label="Se déconnecter">↪</button>
+      </div>
+    </aside>
+
+    <main class="dashboard">
+      <header class="dashboard-header">
+        <div><span class="eyebrow">LUNDI · VUE GLOBALE</span><h1>Bonjour, Admin 👋</h1><p>Voici ce qui se passe sur Sama Services aujourd’hui.</p></div>
+        <div class="header-actions"><span class="live"><i></i>Systèmes opérationnels</span><button class="refresh" (click)="connect()" aria-label="Actualiser">↻</button></div>
+      </header>
+
+      @if (error()) { <div class="alert global-alert">{{ error() }}</div> }
+
+      <section class="stats-grid">
+        <article><span class="stat-icon green">♙</span><div><small>PRESTATAIRES</small><strong>{{ overview()?.totalProfessionals || 0 }}</strong><p><b>+{{ overview()?.professionals?.pending || 0 }}</b> à examiner</p></div></article>
+        <article><span class="stat-icon lime">⌛</span><div><small>EN ATTENTE</small><strong>{{ overview()?.professionals?.pending || 0 }}</strong><p>Demandes à valider</p></div></article>
+        <article><span class="stat-icon sand">✓</span><div><small>PROFILS VALIDÉS</small><strong>{{ overview()?.professionals?.approved || 0 }}</strong><p>Actifs dans le catalogue</p></div></article>
+        <article><span class="stat-icon dark">◎</span><div><small>PLATEFORMES</small><strong>2 / 2</strong><p>Web et mobile en ligne</p></div></article>
+      </section>
+
+      <section class="platform-section">
+        <div class="section-title"><div><span class="eyebrow">ÉCOSYSTÈME</span><h2>État des interfaces</h2></div><span class="updated">Mis à jour à l’instant</span></div>
+        <div class="platform-grid">
+          <article>
+            <div class="platform-top"><span class="platform-icon">▣</span><span class="online">● En ligne</span></div>
+            <h3>Application mobile</h3><p>Flutter · Android & iOS</p>
+            <div class="platform-metrics"><span><small>STATUT API</small><strong>Connectée</strong></span><span><small>CATALOGUE</small><strong>{{ overview()?.professionals?.approved || 0 }} profils</strong></span></div>
+          </article>
+          <article>
+            <div class="platform-top"><span class="platform-icon orange">◫</span><span class="online">● En ligne</span></div>
+            <h3>Interface web</h3><p>Angular · Responsive</p>
+            <div class="platform-metrics"><span><small>STATUT API</small><strong>Connectée</strong></span><span><small>INSCRIPTIONS</small><strong>Ouvertes</strong></span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="applications">
+        <div class="section-title"><div><span class="eyebrow">MODÉRATION</span><h2>Inscriptions prestataires</h2></div></div>
+        <div class="toolbar">
+          <div class="filters">
+            @for (filter of ['all', 'pending', 'approved', 'rejected']; track filter) {
+              <button [class.active]="activeFilter() === filter" (click)="setFilter($any(filter))">
+                {{ filter === 'all' ? 'Toutes' : statusLabel($any(filter)) }}
+              </button>
+            }
+          </div>
+          <form class="search" (ngSubmit)="applySearch()"><span>⌕</span><input name="q" [ngModel]="search()" (ngModelChange)="search.set($event)" placeholder="Rechercher un prestataire…" /></form>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>PRESTATAIRE</th><th>MÉTIER</th><th>ZONE</th><th>INSCRIPTION</th><th>STATUT</th><th></th></tr></thead>
+            <tbody>
+              @for (professional of professionals(); track professional.id) {
+                <tr>
+                  <td><button class="person" (click)="openDetails(professional)"><span>{{ initials(professional.name) }}</span><div><strong>{{ professional.name }}</strong><small>{{ professional.phone }}</small></div></button></td>
+                  <td>{{ professional.job }}</td><td>{{ professional.location }}</td>
+                  <td>{{ professional.createdAt | date:'dd MMM yyyy' }}</td>
+                  <td><span class="status" [class]="professional.status">{{ statusLabel(professional.status) }}</span></td>
+                  <td class="actions">
+                    @if (professional.status === 'pending') {
+                      <button class="approve" [disabled]="updatingId() === professional.id" (click)="updateStatus(professional, 'approved')">Valider</button>
+                      <button class="reject" [disabled]="updatingId() === professional.id" (click)="updateStatus(professional, 'rejected')" aria-label="Refuser">×</button>
+                    } @else { <button class="details" (click)="openDetails(professional)">Voir le profil</button> }
+                  </td>
+                </tr>
+              } @empty {
+                <tr><td colspan="6" class="empty">Aucune inscription ne correspond à cette sélection.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    @if (selected(); as professional) {
+      <div class="drawer-backdrop" (click)="closeDetails()"></div>
+      <aside class="profile-drawer">
+        <button class="drawer-close" (click)="closeDetails()">×</button>
+        <span class="profile-avatar">{{ initials(professional.name) }}</span>
+        <span class="status" [class]="professional.status">{{ statusLabel(professional.status) }}</span>
+        <h2>{{ professional.name }}</h2><p>{{ professional.job }} · {{ professional.location }}</p>
+        <dl><div><dt>Téléphone</dt><dd>{{ professional.phone }}</dd></div><div><dt>Pièce d’identité</dt><dd>{{ professional.hasIdentityDocument ? 'Document transmis' : 'Manquante' }}</dd></div><div><dt>Inscription</dt><dd>{{ professional.createdAt | date:'longDate' }}</dd></div></dl>
+        @if (professional.status === 'pending') {
+          <button class="drawer-approve" (click)="updateStatus(professional, 'approved')">✓ Valider l’inscription</button>
+          <button class="drawer-reject" (click)="updateStatus(professional, 'rejected')">Refuser la demande</button>
+        } @else if (professional.status === 'approved') {
+          <button class="drawer-reject" (click)="updateStatus(professional, 'suspended')">Suspendre le profil</button>
+        }
+      </aside>
+    }
+  }
+</div>
