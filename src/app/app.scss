@@ -3208,11 +3208,7 @@ footer {
 
 .service-stack {
   position: relative;
-  /*
-   * Keep enough runway after the final card so the sticky introduction is
-   * released only once that card has fully left the reading area.
-   */
-  padding-bottom: clamp(300px, 42vh, 460px);
+  padding-bottom: 70px;
 }
 
 .stacked-card {
