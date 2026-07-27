@@ -32,93 +32,25 @@
 
 <main>
   <section class="hero" id="accueil">
-    <div class="hero-orb hero-orb-one"></div>
-    <div class="hero-orb hero-orb-two"></div>
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-eyebrow"><span>Services locaux</span><span>Dakar · Sénégal</span></div>
-        <h1>Le bon pro.<br /><em>Tout simplement.</em></h1>
-        <p class="hero-copy">
-          Des professionnels vérifiés, près de chez vous.
-        </p>
-        <div class="hero-actions">
-          <a class="button" href="#inscription">
-            Devenir prestataire
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
-          <button class="button button-ghost" type="button" (click)="openDemo()">
-            <span class="play">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z" /></svg>
-            </span>
-            Voir la démo
-          </button>
-        </div>
-        <div class="trust">
-          <div class="avatars">
-            <span>FD</span><span>MB</span><span>AS</span><span>+</span>
-          </div>
-          <div>
-            <div class="stars" aria-label="Note : 4,9 sur 5">★★★★★</div>
-            <p><strong>4,9/5</strong> · Plus de 2 000 utilisateurs</p>
-          </div>
-        </div>
-      </div>
+    <div class="hero-grid-pattern"></div>
+    <div class="container hero-stage">
+      <img
+        class="hero-talent-collage"
+        src="assets/provider-collage.png"
+        alt="Prestataires Sama Services : coiffure, plomberie, aide à domicile et électricité"
+      />
 
-      <div class="hero-visual" aria-label="Aperçu de l'application Sama Services">
-        <span class="visual-caption caption-top">SAMA / MOBILE APP</span>
-        <span class="visual-caption caption-side">DES PROS. SIMPLEMENT.</span>
-        <div class="dotted-pattern"></div>
-        <div class="floating-card card-verified">
-          <span class="floating-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m7 12 3 3 7-7" />
-            </svg>
-          </span>
-          <div><strong>Profils vérifiés</strong><small>Des experts de confiance</small></div>
+      <div class="hero-content">
+        <span class="hero-pill"><i></i> 500+ professionnels vérifiés</span>
+        <h1>Le talent local.<br /><em>À portée de main.</em></h1>
+        <p class="hero-copy">Trouvez le bon professionnel, près de chez vous.</p>
+        <div class="hero-actions">
+          <a class="button hero-primary" href="#services">Trouver un service <span>→</span></a>
+          <a class="button hero-secondary" href="#inscription">Devenir prestataire</a>
         </div>
-        <div class="phone">
-          <div class="phone-speaker"></div>
-          <div class="phone-screen">
-            <div class="app-top">
-              <div>
-                <small>Bonjour 👋</small>
-                <strong>De quoi avez-vous besoin ?</strong>
-              </div>
-              <span class="app-avatar">AD</span>
-            </div>
-            <div class="app-search">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m16 16 4 4" /></svg>
-              Rechercher un service
-            </div>
-            <div class="app-banner">
-              <small>Votre quotidien, simplifié</small>
-              <strong>Des pros à portée de main</strong>
-              <span>Explorer →</span>
-            </div>
-            <div class="app-section-title"><strong>Catégories</strong><small>Voir tout</small></div>
-            <div class="app-categories">
-              <div><span>⌂</span><small>Maison</small></div>
-              <div><span>⌁</span><small>Réparation</small></div>
-              <div><span>✦</span><small>Beauté</small></div>
-              <div><span>•••</span><small>Autres</small></div>
-            </div>
-            <div class="app-section-title"><strong>Près de vous</strong><small>Voir tout</small></div>
-            <div class="provider">
-              <img src="assets/services-hero.jpg" alt="" />
-              <div><strong>Moussa Diop</strong><small>Électricien · 1,2 km</small><span>★ 4,9</span></div>
-            </div>
-            <div class="app-nav"><span>⌂<small>Accueil</small></span><span>⌕<small>Explorer</small></span><span>♡<small>Favoris</small></span><span>○<small>Profil</small></span></div>
-          </div>
-        </div>
-        <div class="floating-card card-rating">
-          <span class="floating-icon amber">★</span>
-          <div><strong>4,9 / 5</strong><small>+ de 1 200 avis</small></div>
-        </div>
+        <div class="hero-trust"><span>★★★★★</span><small>4,9/5 · Profils contrôlés</small></div>
       </div>
     </div>
-    <div class="hero-bottom"></div>
   </section>
 
   <section class="proof">
@@ -161,7 +93,7 @@
             </div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
-            <a href="#contact">En savoir plus <span>→</span></a>
+            <a href="#inscription">En savoir plus <span>→</span></a>
           </article>
         }
       </div>
