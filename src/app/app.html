@@ -140,8 +140,8 @@
   <section class="section how-section" id="fonctionnement">
     <div class="container">
       <div class="center-heading">
-        <span class="section-kicker">EN 3 ÉTAPES</span>
-        <h2>Simple. Rapide. Sûr.</h2>
+        <div><span class="section-kicker">COMMENT ÇA MARCHE</span><h2>Du besoin<br />au bon pro.</h2></div>
+        <p>Trois étapes.<br />Zéro complication.</p>
       </div>
       <div class="steps">
         @for (step of steps; track step.number; let last = $last) {
@@ -158,6 +158,7 @@
             </div>
             <h3>{{ step.title }}</h3>
             <p>{{ step.description }}</p>
+            <a href="#services" aria-label="Découvrir les services">Découvrir <span>↗</span></a>
             @if (!last) { <div class="step-line"></div> }
           </article>
         }
