@@ -1973,6 +1973,22 @@ footer {
   }
 }
 
+.playstore-mark,
+.apple-mark {
+  flex: 0 0 auto;
+  stroke: none !important;
+}
+
+.playstore-mark .play-blue { fill: #00a0ff !important; }
+.playstore-mark .play-green { fill: #00d084 !important; }
+.playstore-mark .play-yellow { fill: #ffcf3f !important; }
+.playstore-mark .play-red { fill: #ff4b55 !important; }
+
+.apple-mark path {
+  fill: #fff !important;
+  stroke: none !important;
+}
+
 /* Editorial redesign — inspired by independent identity studios */
 .site-header {
   height: 84px;
