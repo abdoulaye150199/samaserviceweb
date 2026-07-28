@@ -3234,7 +3234,7 @@ footer {
 }
 
 .stacked-card:last-child {
-  margin-bottom: 0;
+  margin-bottom: 52vh;
 }
 
 .stacked-card.card-0 {
@@ -3592,6 +3592,8 @@ footer {
 /* Editorial process section */
 .how-section {
   position: relative;
+  z-index: 8;
+  margin-top: -52vh;
   overflow: hidden;
   padding: 125px 0;
   color: #f4f3ed;
@@ -3942,5 +3944,13 @@ footer {
 
   .service-stack {
     padding-bottom: 90px;
+  }
+
+  .stacked-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .how-section {
+    margin-top: 0;
   }
 }
