@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, REQUEST, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDashboard } from './admin-dashboard';
@@ -17,6 +17,7 @@ type Service = {
   styleUrl: './app.scss',
 })
 export class App {
+  private readonly serverRequest = inject(REQUEST, { optional: true });
   private readonly registrationEndpoint =
     'https://backendsamaservice.onrender.com/v1/professionals/register';
 
@@ -30,14 +31,22 @@ export class App {
   protected readonly identityFile = signal<File | null>(null);
   protected readonly selfieFile = signal<File | null>(null);
   protected readonly currentYear = new Date().getFullYear();
-  protected readonly adminMode = signal(
-    typeof window !== 'undefined' &&
-      window.location.pathname.replace(/\/+$/, '') === '/nimda',
-  );
+  protected readonly adminMode = signal(this.isAdminPath());
 
   @HostListener('window:popstate')
   protected syncView(): void {
-    this.adminMode.set(window.location.pathname.replace(/\/+$/, '') === '/nimda');
+    this.adminMode.set(this.isAdminPath());
+  }
+
+  private isAdminPath(): boolean {
+    const pathname =
+      typeof window !== 'undefined'
+        ? window.location.pathname
+        : this.serverRequest
+          ? new URL(this.serverRequest.url).pathname
+          : '';
+
+    return pathname.replace(/\/+$/, '') === '/nimda';
   }
 
   protected readonly services: Service[] = [
