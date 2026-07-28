@@ -3954,3 +3954,14 @@ footer {
     margin-top: 0;
   }
 }
+
+/* Lift the central hero message while keeping the provider cards in place. */
+.hero-stage .hero-content {
+  transform: translateY(-42px);
+}
+
+@media (max-width: 600px) {
+  .hero-stage .hero-content {
+    transform: translateY(-22px);
+  }
+}
