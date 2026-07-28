@@ -1,4 +1,4 @@
-import { Component, HostListener, REQUEST, inject, signal } from '@angular/core';
+import { Component, HostListener, REQUEST, afterNextRender, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDashboard } from './admin-dashboard';
@@ -32,6 +32,17 @@ export class App {
   protected readonly selfieFile = signal<File | null>(null);
   protected readonly currentYear = new Date().getFullYear();
   protected readonly adminMode = signal(this.isAdminPath());
+
+  constructor() {
+    afterNextRender(() => {
+      const sectionId = window.location.hash.slice(1);
+      if (!['accueil', 'services', 'fonctionnement', 'telecharger', 'inscription'].includes(sectionId)) {
+        return;
+      }
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      document.getElementById(sectionId)?.scrollIntoView({ block: 'start' });
+    });
+  }
 
   @HostListener('window:popstate')
   protected syncView(): void {
@@ -123,6 +134,15 @@ export class App {
 
   protected closeMenu(): void {
     this.mobileMenuOpen.set(false);
+  }
+
+  protected scrollToSection(event: Event, sectionId: string): void {
+    event.preventDefault();
+    this.closeMenu();
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
 
   protected openDemo(): void {

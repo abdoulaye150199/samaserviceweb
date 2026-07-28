@@ -3,15 +3,15 @@
 } @else {
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="#accueil" aria-label="Sama Services - Accueil" (click)="closeMenu()">
+    <a class="brand" href="#accueil" aria-label="Sama Services - Accueil" (click)="scrollToSection($event, 'accueil')">
       <img src="assets/app-icon.png" alt="" />
       <span>Sama <strong>Services</strong></span>
     </a>
 
     <nav [class.open]="mobileMenuOpen()" aria-label="Navigation principale">
-      <a href="#accueil" (click)="closeMenu()">Accueil</a>
-      <a href="#services" (click)="closeMenu()">Services</a>
-      <a href="#fonctionnement" (click)="closeMenu()">Comment ça marche</a>
+      <a href="#accueil" (click)="scrollToSection($event, 'accueil')">Accueil</a>
+      <a href="#services" (click)="scrollToSection($event, 'services')">Services</a>
+      <a href="#fonctionnement" (click)="scrollToSection($event, 'fonctionnement')">Comment ça marche</a>
     </nav>
 
     <button
@@ -50,10 +50,10 @@
       <div class="hero-content">
         <h1>Le talent local.<br /><em>À portée de main.</em></h1>
         <div class="hero-actions">
-          <a class="button hero-primary" href="#inscription">Devenir prestataire <span>→</span></a>
+          <a class="button hero-primary" href="#inscription" (click)="scrollToSection($event, 'inscription')">Devenir prestataire <span>→</span></a>
         </div>
         <div class="hero-stores">
-          <a href="#telecharger" aria-label="Télécharger sur Google Play">
+          <a href="#telecharger" aria-label="Télécharger sur Google Play" (click)="scrollToSection($event, 'telecharger')">
             <svg class="playstore-mark" viewBox="0 0 32 32" aria-hidden="true">
               <path class="play-blue" d="M5 3v26l12-13L5 3Z" />
               <path class="play-green" d="m5 3 16 9-4 4L5 3Z" />
@@ -62,7 +62,7 @@
             </svg>
             <span><small>Disponible sur</small><strong>Google Play</strong></span>
           </a>
-          <a href="#telecharger" aria-label="Télécharger sur l’App Store">
+          <a href="#telecharger" aria-label="Télécharger sur l’App Store" (click)="scrollToSection($event, 'telecharger')">
             <svg class="apple-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M21 17c0-4 3-6 3-6-2-3-5-3-6-3-2 0-3 1-5 1s-3-1-5-1c-3 0-6 3-6 8 0 6 4 12 7 12 2 0 3-1 5-1s3 1 5 1c3 0 6-5 7-9-3-1-5-3-5-6Z" /><path d="M18 3c0 2-2 4-4 5 0-3 2-5 4-5Z" /></svg>
             <span><small>Télécharger dans</small><strong>l’App Store</strong></span>
           </a>
@@ -87,7 +87,7 @@
         <h2>Tout ce qu’il<br /><span>vous faut.</span></h2>
         <p>Un besoin. Un pro. Une solution.</p>
         <div class="service-tags"><span>Maison</span><span>Bien-être</span><span>Réparation</span></div>
-        <a class="services-join" href="#inscription">Rejoindre le réseau <span>→</span></a>
+        <a class="services-join" href="#inscription" (click)="scrollToSection($event, 'inscription')">Rejoindre le réseau <span>→</span></a>
       </div>
 
       <div class="service-stack">
@@ -129,7 +129,7 @@
                 <span class="card-kicker">SAMA / SERVICE 0{{ index + 1 }}</span>
                 <h3>{{ service.title }}</h3>
                 <p>{{ service.description }}</p>
-                <a href="#inscription">Découvrir <span>→</span></a>
+                <a href="#inscription" (click)="scrollToSection($event, 'inscription')">Découvrir <span>→</span></a>
               </div>
             </div>
           </article>
@@ -153,7 +153,7 @@
             </div>
             <h3>{{ step.title }}</h3>
             <p>{{ step.description }}</p>
-            <a href="#services" aria-label="Découvrir les services">Découvrir <span>↗</span></a>
+            <a href="#services" aria-label="Découvrir les services" (click)="scrollToSection($event, 'services')">Découvrir <span>↗</span></a>
             @if (!last) { <div class="step-line"></div> }
           </article>
         }
@@ -217,7 +217,7 @@
             <span class="section-kicker">INSCRIPTION ENVOYÉE</span>
             <h3>Votre demande est en cours d’examen</h3>
             <p>Notre équipe va vérifier vos informations. Votre profil apparaîtra dans le catalogue dès sa validation.</p>
-            <a class="button" href="#services">Découvrir les services</a>
+            <a class="button" href="#services" (click)="scrollToSection($event, 'services')">Découvrir les services</a>
           </div>
         } @else {
           <div class="form-title">
@@ -343,12 +343,12 @@
 <footer>
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="#accueil"><img src="assets/app-icon.png" alt="" /><span>Sama <strong>Services</strong></span></a>
+      <a class="brand" href="#accueil" (click)="scrollToSection($event, 'accueil')"><img src="assets/app-icon.png" alt="" /><span>Sama <strong>Services</strong></span></a>
       <p>Les bons pros, près de vous.</p>
       <div class="socials"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a></div>
     </div>
-    <div><strong>Navigation</strong><a href="#services">Services</a><a href="#fonctionnement">Comment ça marche</a></div>
-    <div><strong>Support</strong><a href="mailto:contact@samaservices.sn">Nous contacter</a><a href="#inscription">Devenir prestataire</a></div>
+    <div><strong>Navigation</strong><a href="#services" (click)="scrollToSection($event, 'services')">Services</a><a href="#fonctionnement" (click)="scrollToSection($event, 'fonctionnement')">Comment ça marche</a></div>
+    <div><strong>Support</strong><a href="mailto:contact@samaservices.sn">Nous contacter</a><a href="#inscription" (click)="scrollToSection($event, 'inscription')">Devenir prestataire</a></div>
     <div><strong>Légal</strong><a href="#">Conditions d’utilisation</a><a href="#">Confidentialité</a><a href="#">Mentions légales</a></div>
   </div>
   <div class="container footer-bottom"><span>© {{ currentYear }} Sama Services. Tous droits réservés.</span><span>Conçu avec soin au Sénégal 🇸🇳</span></div>
