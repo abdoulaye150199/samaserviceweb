@@ -3748,6 +3748,129 @@ footer {
   .how-section .step-illustration { height: 270px; }
 }
 
+/* Refined mobile download panel */
+.download-section {
+  padding: 72px 0 110px;
+  background: #f5f6f2;
+}
+
+.download-card {
+  min-height: 570px;
+  grid-template-columns: 1fr .78fr;
+  align-items: center;
+  padding: 68px 78px;
+  border: 1px solid #303530;
+  border-radius: 28px;
+  background: #181a18;
+}
+
+.download-card::before,
+.download-card::after {
+  display: none;
+}
+
+.download-content {
+  align-self: center;
+}
+
+.download-content h2 {
+  max-width: 630px;
+  margin: 15px 0 20px;
+  color: #f4f3ed;
+  font-size: clamp(48px, 5.2vw, 72px);
+  font-weight: 500;
+  line-height: .93;
+  letter-spacing: -.065em;
+}
+
+.download-content p {
+  margin: 0 0 34px;
+  color: #929792;
+  font-size: 13px;
+}
+
+.download-kicker {
+  color: #a9d5bc;
+  font-size: 9px;
+}
+
+.store-buttons {
+  gap: 9px;
+}
+
+.store-buttons a {
+  min-width: 172px;
+  height: 56px;
+  border-color: #3c433d;
+  border-radius: 12px;
+  background: #222522;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.store-buttons a:hover {
+  border-color: #d9ff43;
+  transform: translateY(-2px);
+}
+
+.download-phone {
+  align-self: center;
+  justify-self: end;
+  padding-right: 22px;
+}
+
+.mini-phone {
+  width: 280px;
+  height: 455px;
+  border: 7px solid #0d2e23;
+  border-radius: 40px;
+  box-shadow: 18px 22px 0 #252925;
+  transform: rotate(2deg);
+}
+
+.mini-phone::before {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 76px;
+  height: 18px;
+  border-radius: 999px;
+  background: #0d2e23;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.mini-phone img {
+  width: 76px;
+  height: 76px;
+}
+
+@media (max-width: 900px) {
+  .download-card {
+    grid-template-columns: 1fr;
+    gap: 55px;
+    padding: 58px;
+  }
+  .download-phone {
+    justify-self: center;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .download-section { padding: 38px 0 70px; }
+  .download-card {
+    padding: 42px 24px 50px;
+    border-radius: 22px;
+  }
+  .download-content h2 { font-size: 48px; }
+  .store-buttons { flex-direction: column; }
+  .store-buttons a { width: 100%; }
+  .mini-phone {
+    width: 245px;
+    height: 410px;
+  }
+}
+
 @media (max-width: 680px) {
   .stacked-card {
     min-height: 560px;
