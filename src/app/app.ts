@@ -31,12 +31,13 @@ export class App {
   protected readonly selfieFile = signal<File | null>(null);
   protected readonly currentYear = new Date().getFullYear();
   protected readonly adminMode = signal(
-    typeof window !== 'undefined' && window.location.hash === '#admin',
+    typeof window !== 'undefined' &&
+      window.location.pathname.replace(/\/+$/, '') === '/nimda',
   );
 
-  @HostListener('window:hashchange')
+  @HostListener('window:popstate')
   protected syncView(): void {
-    this.adminMode.set(window.location.hash === '#admin');
+    this.adminMode.set(window.location.pathname.replace(/\/+$/, '') === '/nimda');
   }
 
   protected readonly services: Service[] = [
