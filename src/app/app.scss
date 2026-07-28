@@ -3689,7 +3689,11 @@ footer {
 
 .how-section .step-art-01 img { left: 0; }
 .how-section .step-art-02 img { left: -100%; }
-.how-section .step-art-03 img { left: -200%; }
+.how-section .step-art-03 img {
+  top: 0;
+  left: -200%;
+  transform: none;
+}
 
 .how-section .step-illustration::after {
   position: absolute;
