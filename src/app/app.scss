@@ -3234,7 +3234,7 @@ footer {
 }
 
 .stacked-card:last-child {
-  margin-bottom: 52vh;
+  margin-bottom: 35vh;
 }
 
 .stacked-card.card-0 {
@@ -3593,7 +3593,7 @@ footer {
 .how-section {
   position: relative;
   z-index: 8;
-  margin-top: -52vh;
+  margin-top: 0;
   overflow: hidden;
   padding: 125px 0;
   color: #f4f3ed;
@@ -3919,6 +3919,7 @@ footer {
   position: sticky !important;
   top: clamp(110px, 22vh, 210px) !important;
   align-self: start !important;
+  min-height: 485px;
 }
 
 @media (min-width: 761px) and (max-width: 1100px) {
@@ -3940,6 +3941,7 @@ footer {
   .services-sticky-copy {
     position: relative !important;
     top: auto !important;
+    min-height: 0;
   }
 
   .service-stack {
@@ -3950,7 +3952,4 @@ footer {
     margin-bottom: 0;
   }
 
-  .how-section {
-    margin-top: 0;
-  }
 }
